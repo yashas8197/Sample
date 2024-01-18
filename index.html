@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <label>Filter: </label>
+  <select>
+    <option value="All Department">All Department</option>
+    <option value="IT">IT</option>
+    <option value="Design">Design</option>
+    <option value="Manegement">Manegement</option>
+  </select>
+
+
+  <h1>Add Employee</h1>
+
+  <label>Name:</label><br>
+  <input class="form-control" type="text" id="name" />
+  <br><br>
+
+  <label>Title:</label><br>
+  <input class="form-control" type="text" id="title" />
+  <br><br>
+
+  <label>Select Department:</label><br>
+  <select class="form-control" id="selectDepartment">
+    <option value="IT">IT</option>
+    <option value="Design">Design</option>
+    <option value="Management">Management</option>
+  </select>
+  <br><br>
+
+  <button id="addEmployee">Add Employee</button>
+
+  <ul class="list-group container" id="employeeList"></ul>
+
+  <script>
+    const employees = [
+      {name: "John Doe", title: "Software Engineer", department: "IT"},
+      {name: "Jane Smith", title: "Graphic Designer", department: "Design"},
+      {name: "Bob Johnson", title: "Project Manager", department: "Management"}
+    ];
+
+    const addEmployee = document.querySelector("#addEmployee")
+    const employeeList = document.querySelector("#employeeList")
+
+    function createCard() {
+      employeeList.innerHTML = " "
+      for (let i = 0; i < employees.length; i++) {
+        const listElement = document.createElement('li')
+
+        listElement.className = 'list-group-item d-flex justify-content-between align-items-start'
+
+        const card = document.createElement('div')
+
+        card.className = 'ms-2 me-auto'
+
+        const name = document.createElement('div')
+
+        name.className = 'fw-bold'
+
+        name.textContent = employees[i].name
+
+        const title = document.createElement('p')
+
+        title.textContent = employees[i].title
+
+        const link = document.createElement('p')
+
+        link.textContent = employees[i].department
+
+        card.appendChild(name)
+        card.appendChild(title)
+        card.appendChild(link)
+
+        listElement.appendChild(card)
+
+        employeeList.appendChild(listElement)
+
+      }
+    }
+
+    addEmployee.addEventListener('click', function () {
+      const employeeName = document.querySelector('#name').value
+      const employeeTitle = document.querySelector("#title").value
+      const selectDepartment = document.querySelector("#selectDepartment").value
+
+      if (employeeName && employeeTitle && selectDepartment) {
+        const newEmployee = {
+          name: employeeName,
+          title: employeeTitle,
+          department: selectDepartment
+        }
+
+        employees.push(newEmployee)
+        createCard()
+      }
+    })
+
+    createCard()
+
+
+  </script>
+
+
+
+
+
+</body>
+
+</html>
